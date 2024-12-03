@@ -17,8 +17,8 @@ Node.js (for local development)
 Installation
 Clone the repository:
 
-git clone <repository-url>
-cd <repository-folder>
+git clone https://github.com/Y-mo-tech/GraphQl_Project.git
+
 Install dependencies:
 
 npm install
@@ -46,6 +46,7 @@ http://localhost:8000/graphql
 
 API Endpoints
 Queries:-
+
 Get All Users:-
 
 graphql
@@ -56,7 +57,8 @@ query GetAllUsers {
     role
   }
 }
-Get User by ID
+
+Get User by ID:-
 
 graphql
 query GetUser {
