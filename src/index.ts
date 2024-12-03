@@ -16,7 +16,7 @@ const server = new ApolloServer({
     context: ({req}) => {
         const token = req.headers.authorization || '';
         let user = null;
-        console.log("req.body.operationName====", req.body.operationName)
+        //console.log("req.body.operationName====", req.body.operationName)
         if(req.body.operationName === 'getUser' || req.body.operationName === 'getAllUsers'){
             console.log("req.body.operationName====", req.body.operationName)
             try {

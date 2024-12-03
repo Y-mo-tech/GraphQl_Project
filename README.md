@@ -1,132 +1,99 @@
+GraphQL Application
+This is a simple GraphQL API that allows user registration, login, and retrieval of user details. The application is designed for easy scalability and maintainability.
 
-<!-- Overview
-This project implements a real-time notification system leveraging GraphQL, Socket.IO, and TypeScript. The system supports user authentication and role-based communication in real-time, catering to different user roles like managers and admins. -->
-
-<!-- Features
-Authentication and Authorization:
-
-Utilizes JWT for secure user login and role-based access control.
-Ensures only authenticated users can access protected resources. -->
-
-<!-- GraphQL API:
-
-Supports user registration, login, and querying user-specific data.
-Cleanly structured resolvers and typedefs ensure maintainability. -->
-
-<!-- Real-Time Notifications:
-
-Implements WebSocket communication with Socket.IO.
-Supports role-based rooms where users receive updates relevant to their role.
-Emits notifications for actions like new user registrations and logins. -->
-
-<!-- TypeScript Integration:
-
-Strong typing for resolvers, schemas, and Socket.IO logic.
-Ensures code reliability and reduces runtime errors. -->
-
-<!-- Database Integration:
-
-MongoDB is used as the database with Mongoose as the ORM.
-Models are defined for users and their roles. -->
-
-<!-- Scalable Architecture:
-
-Modular file structure for GraphQL API and WebSocket logic.
-Easy to extend for additional roles and features. -->
+Features:-
+- User Registration: Create a new user by providing an email, password, and role.
+- User Login: Authenticate an existing user using their email and password.
+- Get All Users: Retrieve a list of all registered users.
+- Get User by ID: Fetch details of a specific user by their unique ID.
 
 
-<!-- Technology Stack
-Backend Framework: Node.js
-GraphQL Server: Apollo Server
-WebSocket Library: Socket.IO
-Database: MongoDB with Mongoose
-Language: TypeScript -->
+Getting Started
+Prerequisites:-
+Ensure you have the following installed on your machine:
+
+Docker (for containerization)
+Node.js (for local development)
+Installation
+Clone the repository:
+
+git clone <repository-url>
+cd <repository-folder>
+Install dependencies:
+
+npm install
+Running the Application
+Using Docker
+Build and start the application using Docker Compose:-
+
+docker-compose up
+
+Access the GraphQL Playground at:
+
+http://localhost:8000/graphql
 
 
-<!-- Workflow -->
+Using Node.js
+Start the application:-
+
+npm run start
 
 
-<!-- GraphQL API
+Access the GraphQL Playground at:-
 
-Users can register and log in via GraphQL mutations.
-JWT is generated during login and used for authenticating subsequent requests.
-
-WebSocket Communication
-Upon successful login, users connect to the WebSocket server.
-Based on their role, they join respective rooms (e.g., manager, admin).
-Notifications are broadcast to relevant rooms for actions like:
-A new user registering as a manager.
-A manager logging in to the system. -->
-
-<!-- Implementation Details -->
+http://localhost:8000/graphql
 
 
-<!-- Authentication and Authorization
-JWT-Based:
+API Endpoints
+Queries:-
+Get All Users:-
 
-Tokens are generated upon login and stored securely on the client side.
-The server validates tokens to identify the user and their role.
+graphql
+query GetAllUsers {
+  getAllUsers {
+    id
+    email
+    role
+  }
+}
+Get User by ID
 
-Socket Authentication:
+graphql
+query GetUser {
+  getUser(id: "USER_ID") {
+    id
+    email
+    role
+  }
+}
 
-WebSocket connections are authenticated by validating the JWT in the connection request.
-Valid users are allowed to join specific rooms based on their role. -->
+Mutations
 
-<!-- Real-Time Updates
+Register User:-
 
-Role-based rooms allow targeted communication:
+graphql
+mutation RegisterUser {
+  registerUser(email: "example@example.com", password: "password123", role: "USER_ROLE")
+}
 
-Managers receive notifications relevant to their role.
-Admins get updates for system-wide actions.
+Login User:-
 
-Key Events:
-
-userLoggedIn: Broadcast when a user logs in and joins a room. -->
-
-<!-- Folder Structure
-
-src/
-├── graphql/
-│   ├── resolvers/
-│   ├── typeDefs/
-│   └── schema.ts
-├── sockets/
-│   ├── socketManager.ts
-│   └── events.ts
-├── middlewares/
-│   └── authMiddleware.ts
-├── utils/
-│   ├── jwtUtils.ts
-│   └── logger.ts
-├── models/
-│   └── userModel.ts
-├── config/
-│   └── env.ts
-├── app.ts
-└── server.ts -->
-
-<!-- API Endpoints -->
+graphql
+mutation LoginUser {
+  login(email: "example@example.com", password: "password123")
+}
 
 
-<!-- GraphQL Operations
+Folder Structure:-
 
--- Register User:
-Allows a new user to register with email, password, and role.
--- Login User:
-Authenticates a user and returns a JWT token.
--- Query User:
-Fetches user details based on authentication.
--- Query Users:
-Fetches all user details based on authentication.
+src: Contains the application code, including GraphQL schema, resolvers, and services.
+docker-compose.yml: Docker Compose configuration file.
+package.json: Dependency and script configuration for Node.js.
 
 
-WebSocket Events
+Technologies Used :-
 
-Connection:
-
-Users are authenticated via the WebSocket middleware.
-Authenticated users join rooms based on their role.
-
-Event Broadcasts:
-
-userLoggedIn: Sent to rooms when a user logs in. -->
+GraphQL: API query language.
+Node.js: Backend runtime environment.
+Docker: Containerization.
+Apollo Server: For building GraphQL APIs.

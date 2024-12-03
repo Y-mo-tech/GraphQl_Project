@@ -1,10 +1,10 @@
 import bcrypt from 'bcryptjs'
-import {User, IUser} from '../models/user'
+import {User} from '../models/user'
 import {generateToken, jwtPayload} from '../utils/auth';
 import {createWebSocketClient} from '../clients/client'
-//import {Redis} from 'ioredis'
+import {Redis} from 'ioredis'
 
-//const client = new Redis() 
+const client = new Redis() 
 
 type GqlType = {
     id: string
@@ -37,11 +37,11 @@ export const resolvers = {
       },
       getAllUsers: async (parent: unknown, _:any, context: { user: jwtPayload }): Promise<GqlType[]> => {
         try{
-        //    let cachedData = await client.get('users')
-        //    if(cachedData){
-        //     console.log("Cached Data is present")
-        //     return JSON.parse(cachedData)
-        //    }
+           let cachedData = await client.get('users')
+           if(cachedData){
+            console.log("Cached Data is present")
+            return JSON.parse(cachedData)
+           }
 
            const users = await User.find({});
 
@@ -55,7 +55,7 @@ export const resolvers = {
                role: user.role,
             }));
 
-            //client.set('users', JSON.stringify(usersUpdated))
+            client.set('users', JSON.stringify(usersUpdated))
 
             return usersUpdated;
 
