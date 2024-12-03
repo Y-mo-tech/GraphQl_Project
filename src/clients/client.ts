@@ -14,9 +14,9 @@ export const createWebSocketClient = (jwtToken: string) => {
         console.error('Connection error:', err.message);
     });
 
-    socket.on("userJoined", (data) => {
-        console.log("Message received from server:", data);
-    });
+    // socket.on("userJoined", (data) => {
+    //     console.log("Message received from server:", data);
+    // });
 
     return socket;
 };

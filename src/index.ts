@@ -46,7 +46,7 @@ const startServer = async (): Promise<void> => {
 
         app.use(express.json())
         app.use('/graphql', (req, res, next)=>{
-            let authRoutes = ['getUser'];
+            //let authRoutes = ['getUser', 'getAllUSers'];
             
             next()
         })
@@ -69,7 +69,7 @@ const serverConnection = (io: any) => {
     console.log("Inside server connection")
     io.use((socket: any, next: any) => {
        const token = socket.handshake.auth.token;
-       console.log("=== token inside server connection =====", token)
+       //console.log("=== token inside server connection =====", token)
        if (!token) {
            return next(new Error('Authentication error'));
        }
@@ -77,7 +77,7 @@ const serverConnection = (io: any) => {
        try {
            const payload = auth(token)
 
-           console.log("payload====---", payload)
+           //console.log("payload====---", payload)
            socket.data.user = payload;
            next();
        } catch (err) {
@@ -87,7 +87,7 @@ const serverConnection = (io: any) => {
 
     io.on('connection', (socket: any) => {
         const user = socket.data.user;
-        console.log("user====---", user)
+        //console.log("user====---", user)
         console.log(`User connected: ${user.email}, Role: ${user.role}`);
     
         socket.join(user.role);

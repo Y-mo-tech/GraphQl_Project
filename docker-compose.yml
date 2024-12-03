@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     # build:
-    #   context: .          # This tells Docker to use the current directory for building the image
+    #   context: .          
     #   dockerfile: Dockerfile
     # ports:
     #   - "8000:8000"
@@ -13,7 +13,7 @@ services:
     # environment:
     #   - MONGO_URL=mongodb://mongodb:27017/user
     # volumes:
-    #   - .:/usr/src/app   # Mount the entire project directory (including `src`) into the container
+    #   - .:/usr/src/app   
     # command: npm run start
 
   mongodb:
